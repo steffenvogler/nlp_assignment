@@ -5,7 +5,7 @@
 
 - [README](#readme)
 - [General](#general)
-  - [Overview](#results)
+- [Results](#results)
 - [Checklist](#Checklist)
 
 <!-- /TOC -->
@@ -30,7 +30,12 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 # Checklist
  - (as of Feb 15, 2019)
  - [x] Start Readme
- - [ ] Take kibana response and transpose this in a format useful for training
+ - [ ] Implement VADER
+ - [ ] Implement AFINN
+ - [ ] Implement NLTK
+ - [ ] Do visualization
+ - [ ] Check other libs
+ 
 
    
 
