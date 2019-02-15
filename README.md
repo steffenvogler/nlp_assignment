@@ -5,7 +5,7 @@
 
 - [README](#readme)
 - [General](#general)
-  - [Overview](#overview)
+  - [Overview](#results)
 - [Checklist](#Checklist)
 
 <!-- /TOC -->
@@ -16,10 +16,8 @@ ___
 
 Assignment of a NLP sentiment analysis. Along the project I will try to implement as many solutions as possible (given the time). At the end we can compare accuracies of each approach.
 
-## Overview
-The following paragraphs descibe (i) data input, (ii) training on Jupyter notebook, (iii) training inside docker container (the proper way for CI/CD), and strategies for data output.
+# Results
 
-Please see the following flow chart for an overview. [Link](./doc/SageMaker_en_detail.pdf)
 
 | solution | accuracy | Link to source                                     |
 | -------- | -------- | -------------------------------------------------- |
