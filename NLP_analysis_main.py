@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
 WITH_PREPROCESSING = False
-APPROACH_DICT = {'vader': vader}
+APPROACH_DICT = {'nrc': nrc} # {'vader': vader, 'nrc': nrc}
 
 # INPUT AND PARSING
 df = read_list(PATH)
@@ -45,9 +45,9 @@ for i in range(0, len(APPROACH_DICT)):
     item = list(APPROACH_DICT.values())[i]
     analysis_type = str(list(APPROACH_DICT.keys())[i])
     print ("Type of analysis: {m} {n} preprocessing".format(m = analysis_type, n = preprocess_string))
-    df_result, table_pred = item(df)
-    df_pred = df_result[['Positive', 'Neutral', 'Negative']]
-
+    table_pred = item(df)
+    print (len(table_pred))
+    #df_pred = df_result[['Positive', 'Neutral', 'Negative']]
 
     cnf_matrix = confusion_matrix(table_gt, table_pred)
     accuracy = accuracy_score(table_gt, table_pred)
