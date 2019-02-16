@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
 WITH_PREPROCESSING = False
-APPROACH_DICT = {'nrc': nrc} # {'vader': vader, 'nrc': nrc}
+APPROACH_DICT = {'afinn': afinn} # {'vader': vader, 'nrc': nrc, 'afinn': afinn}
 
 # INPUT AND PARSING
 df = read_list(PATH)
