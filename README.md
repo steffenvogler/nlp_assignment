@@ -19,11 +19,15 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 # Results
 
 
-| solution | accuracy | Link to source                                     |
-| -------- | -------- | -------------------------------------------------- |
-| VADER    | na       | [VADER](https://github.com/cjhutto/vaderSentiment) |
-| AFINN    |          |                                                    |
-| NLTK     | na       |                                                    |
+| solution    | approach | accuracy | Link to source                                     |
+| ----------- | -------- | -------- | -------------------------------------------------- |
+| VADER       | lexicon  | na       | [VADER](https://github.com/cjhutto/vaderSentiment) |
+| AFINN       | lexicon  |          |                                                    |
+| NLTK        | lexicon  | na       |                                                    |
+| NRC         | lexicon  |          |                                                    |
+| SVM         | ML       | na       |                                                    |
+| Naive Bayes | ML       |          |                                                    |
+| Pattern     | ML       |          |                                                    |
 
 
 
@@ -33,10 +37,11 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
  - [ ] Implement VADER
  - [ ] Implement AFINN
  - [ ] Implement NLTK
+ - [ ] Implement SVM
  - [ ] Do visualization
  - [ ] Check other libs
- 
 
-   
+
+
 
 ## 

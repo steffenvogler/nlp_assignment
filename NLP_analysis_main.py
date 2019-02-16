@@ -9,10 +9,16 @@
 ######################################################
 
 from util import *
+from analysis import *
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+import numpy as np
+import matplotlib.pyplot as plt
 
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
-WITH_PREPROCESSING = True
+WITH_PREPROCESSING = False
+APPROACH_DICT = {'vader': vader}
 
 # INPUT AND PARSING
 df = read_list(PATH)
@@ -24,7 +30,40 @@ print ("Positive sentences: {m}; Neutral sentences: {n}; Negative sentences: {o}
        .format(m = sum_positive, n = sum_neutral, o = sum_negative, p = len(df)))
 
 # PRE-PROCESSING
+preprocess_string = "without"
 if WITH_PREPROCESSING == True:
-    
+    preprocess_string = "with"
+    pass
 
-print (df_test.head())
+# ANALYSIS
+df_gt = df[['Positive','Neutral', 'Negative']]
+table_gt = df_transform(df_gt)
+class_names = ["Positive", "Neutral", "Negative"]
+
+for i in range(0, len(APPROACH_DICT)):
+    print("-------------------")
+    item = list(APPROACH_DICT.values())[i]
+    analysis_type = str(list(APPROACH_DICT.keys())[i])
+    print ("Type of analysis: {m} {n} preprocessing".format(m = analysis_type, n = preprocess_string))
+    df_result, table_pred = item(df)
+    df_pred = df_result[['Positive', 'Neutral', 'Negative']]
+
+
+    cnf_matrix = confusion_matrix(table_gt, table_pred)
+    accuracy = accuracy_score(table_gt, table_pred)
+    accuracy = str(np.round(accuracy, 4))
+    print ("Accuracy: "+ accuracy)
+
+    np.set_printoptions(precision=2)
+
+    # Plot non-normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Confusion matrix, without norm (analysis type: {m} {n} preprocessing)'.format(m = analysis_type, n = preprocess_string))
+    plt.savefig(analysis_type+'_wo_norm_'+preprocess_string+"_preprocessing_accuracy_of_"+accuracy+".png")
+
+    # Plot normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True, title='Normalized confusion matrix (analysis type: {m} {n} preprocessing)'.format(m = analysis_type, n = preprocess_string))
+    plt.savefig(analysis_type+'_with_norm_'+preprocess_string+"_preprocessing_accuracy_of_"+accuracy+".png")
+
+    print ("-------------------")
