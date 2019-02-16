@@ -12,10 +12,39 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 
 def read_list(path):
     df = pd.read_csv(path, encoding='latin-1', index_col=0, delimiter=';')
     return df
+
+def df_transform_int(df):
+    result_table = []
+    i = 0
+    for index, row in df.iterrows():
+        pos_score = row['Positive']
+        neg_score = row['Negative']
+        neut_score = row['Neutral']
+        i += 1
+        if pos_score == 1:
+            result_table.append(2)
+            continue
+
+        if neg_score == 1:
+            result_table.append(0)
+            continue
+
+        if neut_score == 1:
+            result_table.append(1)
+            continue
+
+        else:
+            print ("corrupt annotation")
+            print (i)
+            break
+
+    return result_table
 
 def df_transform(df):
     result_table = []
@@ -78,3 +107,54 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
+
+def downstream_analysis_lex(table_gt, table_pred, analysis_type, preprocess_string, class_names):
+    cnf_matrix = confusion_matrix(table_gt, table_pred)
+    accuracy = accuracy_score(table_gt, table_pred)
+    accuracy = str(np.round(accuracy, 4))
+    print("Accuracy: " + accuracy)
+
+    np.set_printoptions(precision=2)
+
+    # Plot non-normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names,
+                          title='Confusion matrix, without norm (analysis type: {m} {n} preprocessing)'.format(
+                              m=analysis_type, n=preprocess_string))
+    plt.savefig(analysis_type + '_wo_norm_' + preprocess_string + "_preprocessing_accuracy_of_" + accuracy + ".png")
+
+    # Plot normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
+                          title='Normalized confusion matrix (analysis type: {m} {n} preprocessing)'.format(
+                              m=analysis_type, n=preprocess_string))
+    plt.savefig(analysis_type + '_with_norm_' + preprocess_string + "_preprocessing_accuracy_of_" + accuracy + ".png")
+
+    print("-------------------")
+
+def downstream_analysis_ml(table_gt, table_result, analysis_type, preprocess_string, class_names):
+    # df_pred = df_result[['Positive', 'Neutral', 'Negative']]
+    table_pred = table_result
+    cnf_matrix = confusion_matrix(table_gt, table_pred)
+    accuracy = accuracy_score(table_gt, table_pred)
+    accuracy = str(np.round(accuracy, 4))
+    print("Accuracy: " + accuracy)
+
+    np.set_printoptions(precision=2)
+
+    # Plot non-normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names,
+                          title='Confusion matrix, without norm (analysis type: {m} {n} preprocessing)'.format(
+                              m=analysis_type, n=preprocess_string))
+    plt.savefig(analysis_type + '_wo_norm_' + preprocess_string + "_preprocessing_accuracy_of_" + accuracy + ".png")
+
+    # Plot normalized confusion matrix
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
+                          title='Normalized confusion matrix (analysis type: {m} {n} preprocessing)'.format(
+                              m=analysis_type, n=preprocess_string))
+    plt.savefig(
+        analysis_type + '_with_norm_' + preprocess_string + "_preprocessing_accuracy_of_" + accuracy + ".png")
+
+    print("-------------------")

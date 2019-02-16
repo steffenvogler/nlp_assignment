@@ -19,14 +19,14 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 # Results
 
 
-| solution     | approach | accuracy | Link to source                                        |
-| ------------ | -------- | -------- | ----------------------------------------------------- |
-| VADER (NLTK) | lexicon  | 51.8%    | [VADER](https://github.com/cjhutto/vaderSentiment)    |
-| AFINN        | lexicon  | 47.7%    | [AFINN](https://github.com/fnielsen/afinn)            |
-| NRC          | lexicon  | 45.1%    | [NRC](http://sentiment.nrc.ca/lexicons-for-research/) |
-| SVM          | ML       | na       |                                                       |
-| Naive Bayes  | ML       |          | [NLTK](https://www.nltk.org/)                         |
-| Pattern      | ML       |          |                                                       |
+| solution     | approach | accuracy        | Link to source                                               |
+| ------------ | -------- | --------------- | ------------------------------------------------------------ |
+| VADER (NLTK) | lexicon  | 51.8%           | [VADER](https://github.com/cjhutto/vaderSentiment)           |
+| AFINN        | lexicon  | 47.7%           | [AFINN](https://github.com/fnielsen/afinn)                   |
+| NRC          | lexicon  | 45.1%           | [NRC](http://sentiment.nrc.ca/lexicons-for-research/)        |
+| Log Reg      | ML       | 72.2%           | [LogReg](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| NGRAM        | ML       | 77,7%           | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| SVM          | ML       | 64-85% (3 runs) | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
 
 
 
@@ -37,12 +37,7 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
  - [x] Implement AFINN
  - [x] Implement NLTK
  - [x] Implement NRC
- - [ ] Implement SVM
+ - [x] Implement SVM
  - [ ] Implement Naive Bayes
  - [x] Do visualization
  - [ ] Check other libs
-
-
-
-
-## 

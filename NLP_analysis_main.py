@@ -10,15 +10,12 @@
 
 from util import *
 from analysis import *
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-import numpy as np
-import matplotlib.pyplot as plt
+
 
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
 WITH_PREPROCESSING = False
-APPROACH_DICT = {'afinn': afinn} # {'vader': vader, 'nrc': nrc, 'afinn': afinn}
+APPROACH_DICT = {'SVM': svm} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm}
 
 # INPUT AND PARSING
 df = read_list(PATH)
@@ -33,6 +30,7 @@ print ("Positive sentences: {m}; Neutral sentences: {n}; Negative sentences: {o}
 preprocess_string = "without"
 if WITH_PREPROCESSING == True:
     preprocess_string = "with"
+    df = preprocess_df(df)
     pass
 
 # ANALYSIS
@@ -45,25 +43,8 @@ for i in range(0, len(APPROACH_DICT)):
     item = list(APPROACH_DICT.values())[i]
     analysis_type = str(list(APPROACH_DICT.keys())[i])
     print ("Type of analysis: {m} {n} preprocessing".format(m = analysis_type, n = preprocess_string))
-    table_pred = item(df)
-    print (len(table_pred))
-    #df_pred = df_result[['Positive', 'Neutral', 'Negative']]
-
-    cnf_matrix = confusion_matrix(table_gt, table_pred)
-    accuracy = accuracy_score(table_gt, table_pred)
-    accuracy = str(np.round(accuracy, 4))
-    print ("Accuracy: "+ accuracy)
-
-    np.set_printoptions(precision=2)
-
-    # Plot non-normalized confusion matrix
-    plt.figure()
-    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Confusion matrix, without norm (analysis type: {m} {n} preprocessing)'.format(m = analysis_type, n = preprocess_string))
-    plt.savefig(analysis_type+'_wo_norm_'+preprocess_string+"_preprocessing_accuracy_of_"+accuracy+".png")
-
-    # Plot normalized confusion matrix
-    plt.figure()
-    plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True, title='Normalized confusion matrix (analysis type: {m} {n} preprocessing)'.format(m = analysis_type, n = preprocess_string))
-    plt.savefig(analysis_type+'_with_norm_'+preprocess_string+"_preprocessing_accuracy_of_"+accuracy+".png")
-
-    print ("-------------------")
+    table_pred, table_gt, table_result  = item(df)
+    if len(table_pred) > 0:
+        downstream_analysis_lex(table_gt, table_pred, analysis_type, preprocess_string, class_names)
+    else:
+        downstream_analysis_ml(table_gt, table_result, analysis_type, preprocess_string, class_names)
