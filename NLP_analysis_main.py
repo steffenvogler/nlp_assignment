@@ -15,7 +15,7 @@ from analysis import *
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
 WITH_PREPROCESSING = False
-APPROACH_DICT = {'SVM': svm} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm}
+APPROACH_DICT = {'NaiveBayes': nb} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'NaiveBayer': nb}
 
 # INPUT AND PARSING
 df = read_list(PATH)
