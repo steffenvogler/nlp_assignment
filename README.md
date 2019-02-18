@@ -37,7 +37,7 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 
 # Exemplary visualization
 
-![](\static\SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875.png?raw=true)
+![](\static\SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875.png)
 
 Normalized confusion matrix with a SVM-classifier on positive/negative dataset. Acc = 87.5%.
 
