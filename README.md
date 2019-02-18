@@ -1,7 +1,3 @@
----
-typora-copy-images-to: static
----
-
 # nlp_assignment
 
 # README
@@ -41,7 +37,7 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 
 # Exemplary visualization
 
-![SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875](C:\Temp\DataScience_Team\DS_NLP_Assignment\nlp_assignment\static\SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875.png)
+![SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875](C:\Temp\DataScience_Team\DS_NLP_Assignment\nlp_assignment\static\SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875.png?raw=true)
 
 Normalized confusion matrix with a SVM-classifier on positive/negative dataset. Acc = 87.5%.
 
