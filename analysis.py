@@ -21,7 +21,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB, ComplementNB, BernoulliNB
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from util import df_transform_int
@@ -39,7 +39,7 @@ def preprocess_reviews(reviews):
     return reviews
 
 
-def nb(df):
+def multi_nb(df):
     sentence_array = []
     for index, row in df[:].iterrows():
         #print(row['Sentence'])
@@ -59,7 +59,37 @@ def nb(df):
     tf_transformer = TfidfTransformer(use_idf=False).fit(sentence_train_clean_count)
     X_train_tf = tf_transformer.transform(sentence_train_clean_count)
 
-    clf = MultinomialNB().fit(X_train_tf, label_train)
+    #clf = MultinomialNB().fit(X_train_tf, label_train)
+    clf = ComplementNB().fit(X_train_tf, label_train)
+
+    X_test_counts = count_vect.transform(sentence_test_clean)
+    X_test_tf = tf_transformer.transform(X_test_counts)
+    print("Final Accuracy: %s"
+          % accuracy_score(label_test, clf.predict(X_test_tf)))
+
+    return [], label_test, clf.predict(X_test_tf)
+
+def bernou_nb(df):
+    sentence_array = []
+    for index, row in df[:].iterrows():
+        #print(row['Sentence'])
+        sentence = row['Sentence']
+        sentence_array.append(sentence)
+
+    labels = df_transform_int(df)
+
+    sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
+
+    sentence_train_clean = preprocess_reviews(sentence_train)
+    sentence_test_clean = preprocess_reviews(sentence_test)
+
+    stop_words = ['in', 'of', 'at', 'a', 'the']
+    count_vect = CountVectorizer(binary=True, ngram_range=(1, 3), stop_words=stop_words)
+    sentence_train_clean_count = count_vect.fit_transform(sentence_train_clean)
+    tf_transformer = TfidfTransformer(use_idf=False).fit(sentence_train_clean_count)
+    X_train_tf = tf_transformer.transform(sentence_train_clean_count)
+
+    clf = BernoulliNB().fit(X_train_tf, label_train)
 
     X_test_counts = count_vect.transform(sentence_test_clean)
     X_test_tf = tf_transformer.transform(X_test_counts)
@@ -69,6 +99,34 @@ def nb(df):
     return [], label_test, clf.predict(X_test_tf)
 
 
+def compl_nb(df):
+    sentence_array = []
+    for index, row in df[:].iterrows():
+        #print(row['Sentence'])
+        sentence = row['Sentence']
+        sentence_array.append(sentence)
+
+    labels = df_transform_int(df)
+
+    sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
+
+    sentence_train_clean = preprocess_reviews(sentence_train)
+    sentence_test_clean = preprocess_reviews(sentence_test)
+
+    stop_words = ['in', 'of', 'at', 'a', 'the']
+    count_vect = CountVectorizer(binary=True, ngram_range=(1, 3), stop_words=stop_words)
+    sentence_train_clean_count = count_vect.fit_transform(sentence_train_clean)
+    tf_transformer = TfidfTransformer(use_idf=False).fit(sentence_train_clean_count)
+    X_train_tf = tf_transformer.transform(sentence_train_clean_count)
+
+    clf = ComplementNB().fit(X_train_tf, label_train)
+
+    X_test_counts = count_vect.transform(sentence_test_clean)
+    X_test_tf = tf_transformer.transform(X_test_counts)
+    print("Final Accuracy: %s"
+          % accuracy_score(label_test, clf.predict(X_test_tf)))
+
+    return [], label_test, clf.predict(X_test_tf)
 
 def svm(df):
     sentence_array = []
