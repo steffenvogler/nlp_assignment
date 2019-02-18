@@ -10,12 +10,14 @@
 
 from util import *
 from analysis import *
+from datetime import datetime
+
 
 
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
 WITH_PREPROCESSING = False
-APPROACH_DICT = {'NaiveBayes': nb} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'NaiveBayer': nb}
+APPROACH_DICT = {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'NaiveBayer': nb} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'NaiveBayer': nb}
 
 # INPUT AND PARSING
 df = read_list(PATH)
@@ -27,24 +29,35 @@ print ("Positive sentences: {m}; Neutral sentences: {n}; Negative sentences: {o}
        .format(m = sum_positive, n = sum_neutral, o = sum_negative, p = len(df)))
 
 # PRE-PROCESSING
-preprocess_string = "without"
+preprocess_string = "with_3_classes"
 if WITH_PREPROCESSING == True:
-    preprocess_string = "with"
+    preprocess_string = "with_bin_class"
+    print (df.head())
     df = preprocess_df(df)
-    pass
+    df_gt = df[['Positive','Neutral', 'Negative']]
+    table_gt = df_transform(df_gt)
+    print ("length gt table:"+str(len(table_gt)))
+    class_names = ['Positive', 'Neutral', 'Negative']
 
-# ANALYSIS
-df_gt = df[['Positive','Neutral', 'Negative']]
-table_gt = df_transform(df_gt)
-class_names = ["Positive", "Neutral", "Negative"]
+else:
+    df_gt = df[['Positive','Neutral', 'Negative']]
+    table_gt = df_transform(df_gt)
+    class_names = ['Positive', 'Neutral', 'Negative']
 
 for i in range(0, len(APPROACH_DICT)):
+    start_time = datetime.now()
     print("-------------------")
     item = list(APPROACH_DICT.values())[i]
     analysis_type = str(list(APPROACH_DICT.keys())[i])
     print ("Type of analysis: {m} {n} preprocessing".format(m = analysis_type, n = preprocess_string))
-    table_pred, table_gt, table_result  = item(df)
+    table_pred, table_gt_2, table_result  = item(df)
     if len(table_pred) > 0:
         downstream_analysis_lex(table_gt, table_pred, analysis_type, preprocess_string, class_names)
+        end_time = datetime.now()
+        print('Duration: {}'.format(end_time - start_time))
     else:
-        downstream_analysis_ml(table_gt, table_result, analysis_type, preprocess_string, class_names)
+        if WITH_PREPROCESSING == True:
+            class_names = ['Positive', 'Negative']
+        downstream_analysis_ml(table_gt_2, table_result, analysis_type, preprocess_string, class_names)
+        end_time = datetime.now()
+        print('Duration: {}'.format(end_time - start_time))

@@ -109,6 +109,8 @@ def plot_confusion_matrix(cm, classes,
     plt.tight_layout()
 
 def downstream_analysis_lex(table_gt, table_pred, analysis_type, preprocess_string, class_names):
+    #print (len(table_gt))
+    #print (len(table_pred))
     cnf_matrix = confusion_matrix(table_gt, table_pred)
     accuracy = accuracy_score(table_gt, table_pred)
     accuracy = str(np.round(accuracy, 4))

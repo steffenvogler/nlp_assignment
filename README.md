@@ -19,25 +19,28 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 # Results
 
 
-| solution                | approach | accuracy        | Link to source                                               |
-| ----------------------- | -------- | --------------- | ------------------------------------------------------------ |
-| VADER (NLTK)            | lexicon  | 51.8%           | [VADER](https://github.com/cjhutto/vaderSentiment)           |
-| AFINN                   | lexicon  | 47.7%           | [AFINN](https://github.com/fnielsen/afinn)                   |
-| NRC                     | lexicon  | 45.1%           | [NRC](http://sentiment.nrc.ca/lexicons-for-research/)        |
-| Log Reg                 | ML       | 72.2%           | [LogReg](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
-| NGRAM                   | ML       | 77,7%           | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
-| SVM                     | ML       | 64-85% (3 runs) | [SVM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
-| Multinomial Naive Bayes | ML       | 64,8% (?)       | [MultiNB](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html) |
+| solution                | approach | accuracy (3-label) | accuracy (2-label) | processing time* [sec] | Link to source                                               |
+| ----------------------- | -------- | ------------------ | ------------------ | ---------------------- | ------------------------------------------------------------ |
+| VADER (NLTK)            | lexicon  | 51.8%              | 58.2%              | 1.5                    | [VADER](https://github.com/cjhutto/vaderSentiment)           |
+| AFINN                   | lexicon  | 47.7%              | 56.1%              | 1.43                   | [AFINN](https://github.com/fnielsen/afinn)                   |
+| NRC                     | lexicon  | 45.1%              | 51%                | 76.5                   | [NRC](http://sentiment.nrc.ca/lexicons-for-research/)        |
+| Log Reg                 | ML       | 72.2%              | 90%                | 0.61                   | [LogReg](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| NGRAM                   | ML       | 77,7%              | 97.5%              | 0.57                   | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| SVM                     | ML       | 64-85% (3 runs)    | 82.5-92.5%         | 0.59                   | [SVM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| Multinomial Naive Bayes | ML       | 64.8% (?)          | 75%                | 0.6                    | [MultiNB](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html) |
 
-
+'*' .... for ML processing time includes features transformation, fitting, and prediction
 
 # Checklist
  - (as of Feb 17, 2019)
- - [x] Start Readme
+ - [x] Start ReadMe
  - [x] Implement VADER
  - [x] Implement AFINN
  - [x] Implement NLTK
  - [x] Implement NRC
  - [x] Implement SVM
  - [x] Implement Naive Bayes
+ - [ ] Test other Bayes modalities
+ - [x] do binary classification
+ - [ ] (long-term): collect more annotated data; try ELMo, ULMFiT or <u>BERT</u>
  - [x] Do visualization

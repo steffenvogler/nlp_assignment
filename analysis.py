@@ -26,29 +26,29 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from util import df_transform_int
 
-def nb(df):
-    sentence_array = []
-    for index, row in df[:].iterrows():
-        print(row['Sentence'])
-        sentence = row['Sentence']
-        sentence_array.append(sentence)
 
-    labels = df_transform_int(df)
-
-
-    sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
-
-
+def preprocess_reviews(reviews):
     REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\?)|(\,)|(\")|(\()|(\))|(\[)|(\])|(\d+)")
     REPLACE_WITH_SPACE = re.compile("(<br\s*/><br\s*/>)|(\-)|(\/)")
     NO_SPACE = ""
     SPACE = " "
 
-    def preprocess_reviews(reviews):
-        reviews = [REPLACE_NO_SPACE.sub(NO_SPACE, line.lower()) for line in reviews]
-        reviews = [REPLACE_WITH_SPACE.sub(SPACE, line) for line in reviews]
+    reviews = [REPLACE_NO_SPACE.sub(NO_SPACE, line.lower()) for line in reviews]
+    reviews = [REPLACE_WITH_SPACE.sub(SPACE, line) for line in reviews]
 
-        return reviews
+    return reviews
+
+
+def nb(df):
+    sentence_array = []
+    for index, row in df[:].iterrows():
+        #print(row['Sentence'])
+        sentence = row['Sentence']
+        sentence_array.append(sentence)
+
+    labels = df_transform_int(df)
+
+    sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
 
     sentence_train_clean = preprocess_reviews(sentence_train)
     sentence_test_clean = preprocess_reviews(sentence_test)
@@ -68,28 +68,19 @@ def nb(df):
 
     return [], label_test, clf.predict(X_test_tf)
 
+
+
 def svm(df):
     sentence_array = []
     for index, row in df[:].iterrows():
-        print(row['Sentence'])
+        #print(row['Sentence'])
         sentence = row['Sentence']
         sentence_array.append(sentence)
 
     labels = df_transform_int(df)
-    print(labels[:5])
+    #print(labels[:5])
     sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
-    print(len(sentence_train))
-
-    REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\?)|(\,)|(\")|(\()|(\))|(\[)|(\])|(\d+)")
-    REPLACE_WITH_SPACE = re.compile("(<br\s*/><br\s*/>)|(\-)|(\/)")
-    NO_SPACE = ""
-    SPACE = " "
-
-    def preprocess_reviews(reviews):
-        reviews = [REPLACE_NO_SPACE.sub(NO_SPACE, line.lower()) for line in reviews]
-        reviews = [REPLACE_WITH_SPACE.sub(SPACE, line) for line in reviews]
-
-        return reviews
+    #print(len(sentence_train))
 
     sentence_train_clean = preprocess_reviews(sentence_train)
     sentence_test_clean = preprocess_reviews(sentence_test)
@@ -110,12 +101,6 @@ def svm(df):
         print("Accuracy for C=%s: %s"
               % (c, accuracy_score(y_val, svm.predict(X_val))))
 
-    # Accuracy for C=0.001: 0.88784
-    # Accuracy for C=0.005: 0.89456
-    # Accuracy for C=0.01: 0.89376
-    # Accuracy for C=0.05: 0.89264
-    # Accuracy for C=0.1: 0.8928
-
     final = LinearSVC(C=0.01)
     final.fit(X, label_train)
     print("Final Accuracy: %s"
@@ -124,30 +109,15 @@ def svm(df):
     return [], label_test, final.predict(X_test)
 
 
-
 def ngram(df):
     sentence_array = []
     for index, row in df[:].iterrows():
-        print(row['Sentence'])
+        #print(row['Sentence'])
         sentence = row['Sentence']
         sentence_array.append(sentence)
 
     labels = df_transform_int(df)
-    print(labels[:5])
     sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
-    print(len(sentence_train))
-
-    REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\?)|(\,)|(\")|(\()|(\))|(\[)|(\])|(\d+)")
-    REPLACE_WITH_SPACE = re.compile("(<br\s*/><br\s*/>)|(\-)|(\/)")
-    NO_SPACE = ""
-    SPACE = " "
-
-    def preprocess_reviews(reviews):
-
-        reviews = [REPLACE_NO_SPACE.sub(NO_SPACE, line.lower()) for line in reviews]
-        reviews = [REPLACE_WITH_SPACE.sub(SPACE, line) for line in reviews]
-
-        return reviews
 
     sentence_train_clean = preprocess_reviews(sentence_train)
     sentence_test_clean = preprocess_reviews(sentence_test)
@@ -173,32 +143,16 @@ def ngram(df):
 
     return [], label_test, final_ngram.predict(X_test)
 
-
-
 def LogReg(df):
     sentence_array = []
     for index, row in df[:].iterrows():
-        print (row['Sentence'])
+        #print (row['Sentence'])
         sentence = row['Sentence']
         sentence_array.append(sentence)
 
     labels = df_transform_int(df)
-    print (labels[:5])
     sentence_train, sentence_test, label_train, label_test = train_test_split(sentence_array, labels, test_size=0.20)
-    print (len(sentence_train))
-
-
-    REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\?)|(\,)|(\")|(\()|(\))|(\[)|(\])|(\d+)")
-    REPLACE_WITH_SPACE = re.compile("(<br\s*/><br\s*/>)|(\-)|(\/)")
-    NO_SPACE = ""
-    SPACE = " "
-
-    def preprocess_reviews(reviews):
-
-        reviews = [REPLACE_NO_SPACE.sub(NO_SPACE, line.lower()) for line in reviews]
-        reviews = [REPLACE_WITH_SPACE.sub(SPACE, line) for line in reviews]
-
-        return reviews
+    #print (len(sentence_train))
 
     sentence_train_clean = preprocess_reviews(sentence_train)
     sentence_test_clean = preprocess_reviews(sentence_test)
@@ -218,14 +172,16 @@ def LogReg(df):
         print("Accuracy for C=%s: %s"
               % (c, accuracy_score(y_val, lr.predict(X_val))))
 
-    final_model = LogisticRegression(C=0.25)
+    final_model = LogisticRegression(C=1)
     final_model.fit(X_baseline, label_train)
     print("Final Accuracy: %s"
           % accuracy_score(label_test, final_model.predict(X_test_baseline)))
     # Final Accuracy: 0.88128
     return [], label_test, final_model.predict(X_test_baseline)
 
+
 def preprocess_df(df):
+    """
     #nltk.download('stopwords')
     from nltk.corpus import stopwords
 
@@ -256,9 +212,13 @@ def preprocess_df(df):
         sentence = row['Sentence']
         sentence_clean = remove_stop_words(sentence)
         df.set_value(index, 'Sentence', sentence_clean)
+    """
 
+    # filter out "neutral" to make it a binary classification
+    #
+    hits = df[df["Neutral"] != 1]
     #print (df.head())
-    return df
+    return hits
 
 
 
@@ -266,8 +226,6 @@ def afinn_init():
     from afinn import Afinn
     afinn = Afinn()
     return afinn
-
-
 
 def afinn(df):
     afinn = afinn_init()
@@ -296,8 +254,6 @@ def afinn(df):
     #print (df_results.head())
     #print (result_table)
     return  result_table, [], []
-
-
 
 
 def nrc(df):
@@ -340,7 +296,6 @@ def nrc(df):
     return result_table, [], []
 
 
-
 def vader_init():
 
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -354,6 +309,7 @@ def vader(df):
     result_table = []
     for index, row in df.iterrows():
         sentence = row['Sentence']
+
         score = analyser.polarity_scores(sentence)
         compound_value = score['compound']
 
