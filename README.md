@@ -33,6 +33,16 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 
 '*' .... for ML: processing time includes feature transformation, fitting, and prediction
 
+
+
+# Exemplary visualization
+
+![SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875](C:\Temp\DataScience_Team\DS_NLP_Assignment\nlp_assignment\static\SVM_with_norm_with_bin_class_preprocessing_accuracy_of_0.875.png?raw=true)
+
+Normalized confusion matrix with a SVM-classifier on positive/negative dataset. Acc = 87.5%.
+
+
+
 # Checklist
 
  - (as of Feb 17, 2019)
@@ -43,7 +53,9 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
  - [x] Implement NRC
  - [x] Implement SVM
  - [x] Implement Naive Bayes
- - [x] Test other Bayes modalities
+ - [ ] Implement K-Nearest Neighbor
+ - [ ] Implement Bags-of-word
+ - [ ] Build ensemble 
  - [x] do binary classification
  - [ ] (long-term): collect more annotated data; try ELMo, ULMFiT or <u>BERT</u>
  - [x] Do visualization
