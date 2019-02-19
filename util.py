@@ -112,13 +112,13 @@ def downstream_analysis_lex(table_gt, table_pred, analysis_type, preprocess_stri
     #print (len(table_pred))
     cnf_matrix = confusion_matrix(table_gt, table_pred)
     accuracy = accuracy_score(table_gt, table_pred)
-    if preprocess_string == "with_3_classes":
-        recall = recall_score(table_gt, table_pred, average='micro')
-    else:
-        recall = recall_score(table_gt, table_pred)
+    #if preprocess_string == "with_3_classes":
+    #    recall = recall_score(table_gt, table_pred, average='micro')
+    #else:
+    #    recall = recall_score(table_gt, table_pred, average='binary')
     accuracy = str(np.round(accuracy, 4))
-    recall = str(np.round(recall, 4))
-    print("Accuracy: {m}; Recall: {n}".format(m=accuracy, n=recall))
+    #recall = str(np.round(recall, 4))
+    print("Accuracy: {m}".format(m=accuracy))
 
     np.set_printoptions(precision=2)
 
@@ -143,13 +143,13 @@ def downstream_analysis_ml(table_gt, table_result, analysis_type, preprocess_str
     table_pred = table_result
     cnf_matrix = confusion_matrix(table_gt, table_pred)
     accuracy = accuracy_score(table_gt, table_pred)
-    if preprocess_string == "with_3_classes":
-        recall = recall_score(table_gt, table_pred, average='micro')
-    else:
-        recall = recall_score(table_gt, table_pred)
+    #if preprocess_string == "with_3_classes":
+    #    recall = recall_score(table_gt, table_pred, average='micro')
+    #else:
+    #    recall = recall_score(table_gt, table_pred)
     accuracy = str(np.round(accuracy, 4))
-    recall = str(np.round(recall, 4))
-    print("Accuracy: {m}; Recall: {n}".format(m=accuracy, n=recall))
+    #recall = str(np.round(recall, 4))
+    print("Accuracy: {m}".format(m=accuracy))
 
 
     np.set_printoptions(precision=2)
