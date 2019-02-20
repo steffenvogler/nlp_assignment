@@ -16,9 +16,9 @@ from datetime import datetime
 
 # ARGUMENTS
 PATH = r"C:\Temp\DataScience_Team\DS_NLP_Assignment\sentences_with_sentiment.csv"
-WITH_PREPROCESSING = True
+WITH_PREPROCESSING = False
 # Fill the appraoch-dictionary with all algorithms that you want to test
-APPROACH_DICT = {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'Multi_NaiveBayer': multi_nb, 'Compl_NaiveBayer': compl_nb, 'Bernou_NaiveBayer': bernou_nb} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'Multi_NaiveBayer': multi_nb, 'Compl_NaiveBayer': compl_nb, 'Bernou_NaiveBayer': bernou_nb}
+APPROACH_DICT = {'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'Multi_NaiveBayer': multi_nb, 'Compl_NaiveBayer': compl_nb, 'Bernou_NaiveBayer': bernou_nb} # {'vader': vader, 'nrc': nrc, 'afinn': afinn, 'LogReg': LogReg, 'ngram': ngram, 'SVM': svm, 'Multi_NaiveBayer': multi_nb, 'Compl_NaiveBayer': compl_nb, 'Bernou_NaiveBayer': bernou_nb}
 
 # INPUT AND PARSING
 df = read_list(PATH)

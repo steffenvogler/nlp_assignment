@@ -154,12 +154,12 @@ def svm(df):
     )
 
     for c in [0.001, 0.005, 0.01, 0.05, 0.1]:
-        svm = LinearSVC(C=c)
+        svm = LinearSVC(C=c,  class_weight='balanced')
         svm.fit(X_train, y_train)
         print("Accuracy for C=%s: %s"
               % (c, accuracy_score(y_val, svm.predict(X_val))))
 
-    final = LinearSVC(C=0.01)
+    final = LinearSVC(C=0.01,  class_weight='balanced')
     final.fit(X, label_train)
     print("Final Accuracy: %s"
           % accuracy_score(label_test, final.predict(X_test)))
@@ -189,12 +189,12 @@ def ngram(df):
         X, label_train, train_size=0.75)
 
     for c in [0.01, 0.05, 0.25, 0.5, 1]:
-        lr = LogisticRegression(C=c)
+        lr = LogisticRegression(C=c,  class_weight='balanced')
         lr.fit(X_train, y_train)
         print("Accuracy for C=%s: %s"
               % (c, accuracy_score(y_val, lr.predict(X_val))))
 
-    final_ngram = LogisticRegression(C=0.5)
+    final_ngram = LogisticRegression(C=0.5,  class_weight='balanced')
     final_ngram.fit(X, label_train)
     print("Final Accuracy: %s"
           % accuracy_score(label_test, final_ngram.predict(X_test)))
@@ -225,12 +225,12 @@ def LogReg(df):
     )
 
     for c in [0.01, 0.05, 0.25, 0.5, 1]:
-        lr = LogisticRegression(C=c)
+        lr = LogisticRegression(C=c, class_weight='balanced')
         lr.fit(X_train, y_train)
         print("Accuracy for C=%s: %s"
               % (c, accuracy_score(y_val, lr.predict(X_val))))
 
-    final_model = LogisticRegression(C=1)
+    final_model = LogisticRegression(C=1, class_weight='balanced')
     final_model.fit(X_baseline, label_train)
     print("Final Accuracy: %s"
           % accuracy_score(label_test, final_model.predict(X_test_baseline)))
