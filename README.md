@@ -16,6 +16,14 @@ ___
 
 Assignment of a NLP sentiment analysis. Along the project I will try to implement as many solutions as possible (given the time). At the end we can compare accuracies of each approach.
 
+# Usage
+
+#0: Clone repository
+
+#1: Create conda environment via "conda env create -f nlp_assign.yml" (change path inside yml file)
+
+#2: Modify (line 18, 19, and 21) and run "NLP_analysis_main.py"
+
 # Results
 
 
@@ -25,7 +33,7 @@ Assignment of a NLP sentiment analysis. Along the project I will try to implemen
 | AFINN                   | lexicon  | 47.7%              | 56.1%              | 1.43                   | [AFINN](https://github.com/fnielsen/afinn)                   |
 | NRC                     | lexicon  | 45.1%              | 51%                | 76.5                   | [NRC](http://sentiment.nrc.ca/lexicons-for-research/)        |
 | Log Reg                 | ML       | 62.9-72.7%         | 90-97.5%           | 0.61                   | [LogReg](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
-| NGRAM                   | ML       | 66.6-75.9%         | 80-97.5%           | 0.57                   | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
+| NGRAM                   | ML       | 66.6-81.5%         | 80-97.5%           | 0.57                   | [NGRAM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
 | SVM                     | ML       | 64.0-85.0%         | 82.5-95.0%         | 0.59                   | [SVM](https://github.com/aaronkub/machine-learning-examples/blob/master/imdb-sentiment-analysis/Sentiment%20Analysis%20Walkthrough%20Part%202.ipynb) |
 | Multinomial Naive Bayes | ML       | 68.5-70.3%         | 75-92.5%           | 0.6                    | [MultiNB](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html) |
 | Complement Naive Bayes  | ML       | 62.9-74.0%         | 82.5-95%           | 0.6                    | [ComplNB](https://scikit-learn.org/stable/modules/naive_bayes.html) |
